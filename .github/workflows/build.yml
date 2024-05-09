@@ -39,6 +39,17 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Decode Keystore
+        env:
+            ENCODED_STRING: ${{ secrets.KEYSTORE }}
+        run: |
+            TMP_KEYSTORE_FILE_PATH="${RUNNER_TEMP}"/keystore
+            mkdir "${TMP_KEYSTORE_FILE_PATH}"
+            echo $ENCODED_STRING | base64 -di > "${TMP_KEYSTORE_FILE_PATH}"/experiment_keystore.jks
+        
+      - name: Make gradlew executable
+        run: chmod +x android/./gradlew
+
       - name: Build APK and ios
         run:  flutter build apk --release --split-per-abi
       - run: |

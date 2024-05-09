@@ -65,7 +65,17 @@ android {
             keyPassword keystoreProperties['keyPassword']
         }
         release {
-            storeFile file(keystoreProperties['storeFile'])
+            def tmpFilePath = System.getProperty("user.home") + "/work/_temp/keystore/"
+            def allFilesFromDir = new File(tmpFilePath).listFiles()
+
+            if (allFilesFromDir != null) {
+                def keystoreFile = allFilesFromDir.first()
+                keystoreFile.renameTo("keystore/experiment_keystore.jks")
+                storeFile = file("keystore/experiment_keystore.jks")
+            } else {
+                storeFile = file("/Users/mohit/experiment_android_key/experiment_keystore.jks")
+            }
+            
             storePassword keystoreProperties['storePassword']
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
