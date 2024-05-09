@@ -46,9 +46,6 @@ jobs:
           fileName: 'experiment_keystore.jks'
           fileDir: "${RUNNER_TEMP}/keystore"
           encodedString: ${{ secrets.KEYSTORE }}
-        
-      - name: Make gradlew executable
-        run: chmod +x android/./gradlew
 
       - name: Build APK and ios
         run:  flutter build apk --release --split-per-abi
