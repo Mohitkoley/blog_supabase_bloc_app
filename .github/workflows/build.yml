@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: 'zulu'
-          java-version: '12'
+          java-version: '17'
 
       - name: Create .env File
         run: |
@@ -48,6 +48,10 @@ jobs:
           encodedString: ${{ secrets.KEYSTORE }}
 
       - name: Build APK and ios
+        env:
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
         run:  flutter build apk --release --split-per-abi
       - run: |
           flutter build ios --no-codesign
