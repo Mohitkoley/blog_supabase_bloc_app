@@ -46,6 +46,12 @@ jobs:
           fileName: 'experiment_keystore.jks'
           fileDir: "${RUNNER_TEMP}/keystore"
           encodedString: ${{ secrets.KEYSTORE }}
+      
+      - name: print keystore path
+        run: echo "${RUNNER_TEMP}/keystore"
+
+      - name: Print tmpFilePath
+        run: echo "${HOME}/temp/keystore/"
 
       - name: Build APK and ios
         env:
