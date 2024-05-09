@@ -44,14 +44,8 @@ jobs:
         uses: timheuer/base64-to-file@v1.2
         with:
           fileName: 'experiment_keystore.jks'
-          fileDir: "${RUNNER_TEMP}/keystore"
+          fileDir: "${HOME}/keystore"
           encodedString: ${{ secrets.KEYSTORE }}
-      
-      - name: print keystore path
-        run: echo "${RUNNER_TEMP}/keystore"
-
-      - name: Print tmpFilePath
-        run: echo "${HOME}/temp/keystore/"
 
       - name: Build APK and ios
         env:
