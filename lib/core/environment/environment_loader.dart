@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -11,7 +13,7 @@ class EnvironmentLoader {
   }
 
   static loadEnv() async {
-    await dotenv.load(fileName: ".env");
+    await dotenv.load(fileName: ".env", mergeWith: Platform.environment);
     try {
       _keys = EnvironmentKeys.fromEnv(dotenv.env);
     } catch (e) {
